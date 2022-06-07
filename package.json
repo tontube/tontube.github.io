@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "vue": "^3.2.36",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vue2-daterange-picker": "^0.6.8"
   },
   "devDependencies": {
     "@types/node": "^16.11.36",

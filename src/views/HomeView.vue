@@ -4,10 +4,16 @@ import SearchBar from '@/components/SearchBar.vue'
 </script>
 
 <template>
-  <main>
+  <main class="main flex flex-row flex-wrap justify-center">
     <Header></Header>
-    <section class="container w-full">
+    <section class="container">
         <SearchBar></SearchBar>
     </section>
   </main>
 </template>
+
+<style lang="css">
+.main {
+
+}
+</style>
