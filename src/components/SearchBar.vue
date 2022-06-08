@@ -3,46 +3,52 @@
     <button class="search-btn px-3 py-2 bg-blue-650 text-white">Search</button>
     <div>
       <span>Search by release date:</span>
-      {{count}}
       <date-range-picker
           ref="picker"
-          :opens="'center'"
-          :locale-data="{ firstDay: 1, format: 'dd-mm-yyyy HH:mm:ss' }"
-          :timePicker="timePicker"
-          :timePicker24Hour="timePicker24Hour"
-          :showWeekNumbers="showWeekNumbers"
-          :showDropdowns="showDropdowns"
-          :autoApply="autoApply"
+          opens="center"
           v-model="dateRange"
-          @update="updateValues"
-          @toggle="logEvent('event: open', $event)"
-          @start-selection="logEvent('event: startSelection', $event)"
-          @finish-selection="logEvent('event: finishSelection', $event)"
-          :linkedCalendars="linkedCalendars"
-          :dateFormat="dateFormat"
+          @update="update"
       >
         <template v-slot:input="picker" style="min-width: 350px;">
-          {{ picker.startDate | date }} - {{ picker.endDate | date }}
+          {{ dateRange.startDate  }} - {{ dateRange.endDate  }}
         </template>
       </date-range-picker>
+      {{dateRange.endDate}}
     </div>
   </div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
+import { reactive, ref, computed} from 'vue'
+
 import DateRangePicker from 'vue2-daterange-picker'
 import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
 
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: "SearchBar",
-  data() {
-    return {
-      count: 1
-    }
-  },
-  components: { DateRangePicker },
+const startDate = new Date();
+const endDate = new Date();
+endDate.setDate(endDate.getDate() + 6);
+
+const dateRange = reactive({startDate: '2019-05-01', endDate: '2019-05-15'})
+
+
+
+const picker = ref({
+  startDate: '', endDate: ''
 })
+const logEvent = (eventName: string, e:Event) => {
+  console.log(e)
+}
+
+const linkedCalendars = (q: any) => {
+  console.log(q)
+}
+const date: any = computed(() => {
+  new Intl.DateTimeFormat("en-US").format(date)
+})
+
+const update = (val: any) => {
+  console.log(val)
+}
 </script>
 
 <style scoped>
