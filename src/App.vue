@@ -6,4 +6,7 @@
 </template>
 
 <style lang="css">
+#app {
+  font-family: 'Roboto', sans-serif;
+}
 </style>

@@ -1,54 +1,38 @@
 <template>
-  <div class="search-box bg-gray-550 w-full rounded-md flex flex-row justify-around items-center">
+  <div class="search-box bg-gray-550 w-full rounded-md flex flex-row-reverse justify-around items-center">
     <button class="search-btn px-3 py-2 bg-blue-650 text-white">Search</button>
-    <div>
-      <span>Search by release date:</span>
-      <date-range-picker
-          ref="picker"
-          opens="center"
-          v-model="dateRange"
-          @update="update"
-      >
-        <template v-slot:input="picker" style="min-width: 350px;">
-          {{ dateRange.startDate  }} - {{ dateRange.endDate  }}
-        </template>
-      </date-range-picker>
-      {{dateRange.endDate}}
+    <div class="flex flex-row justify-space-between items-center">
+      <span class="mr-2 text-base font-normal">Search by release date:</span>
+      <Datepicker v-model="date" range multiCalendars textInput
+                  @update:modelValue="handleDate"
+                  @textSubmit="alertDate"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed} from 'vue'
+import '@vuepic/vue-datepicker/dist/main.css'
+import Datepicker from '@vuepic/vue-datepicker';
 
-import DateRangePicker from 'vue2-daterange-picker'
-import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
+import { ref, onMounted } from 'vue'
 
-const startDate = new Date();
-const endDate = new Date();
-endDate.setDate(endDate.getDate() + 6);
+const date = ref();
 
-const dateRange = reactive({startDate: '2019-05-01', endDate: '2019-05-15'})
-
-
-
-const picker = ref({
-  startDate: '', endDate: ''
-})
-const logEvent = (eventName: string, e:Event) => {
-  console.log(e)
+const alertDate = () => {
+  console.log(date.value);
 }
 
-const linkedCalendars = (q: any) => {
-  console.log(q)
+const handleDate = (modelData: any) => {
+  console.log(modelData)
+  console.log(date.value)
+  // do something else with the data
 }
-const date: any = computed(() => {
-  new Intl.DateTimeFormat("en-US").format(date)
+
+onMounted(() => {
+  const startDate = new Date();
+  const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
 })
 
-const update = (val: any) => {
-  console.log(val)
-}
 </script>
 
 <style scoped>

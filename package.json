@@ -9,9 +9,9 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^3.2.2",
     "vue": "^3.2.36",
-    "vue-router": "^4.0.15",
-    "vue2-daterange-picker": "^0.6.8"
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@types/node": "^16.11.36",
