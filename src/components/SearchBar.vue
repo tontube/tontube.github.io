@@ -5,6 +5,7 @@
       <span class="mr-2 text-base font-normal">Search by release date:</span>
       <Datepicker v-model="date" range multiCalendars textInput
                   @update:modelValue="handleDate"
+
                   @textSubmit="alertDate"/>
     </div>
   </div>
@@ -23,15 +24,13 @@ const alertDate = () => {
 }
 
 const handleDate = (modelData: any) => {
-  console.log(modelData)
-  console.log(date.value)
+  emit("change", modelData)
   // do something else with the data
 }
 
-onMounted(() => {
-  const startDate = new Date();
-  const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
-})
+const emit = defineEmits<{
+  (e: 'change', date: any): void
+}>();
 
 </script>
 
