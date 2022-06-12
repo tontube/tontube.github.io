@@ -5,23 +5,14 @@
                   :genres="genres"
         ></MovieBox>
     </section>
-    <section class="w-full flex flex-row flex-wrap justify-center ">
-      <div class="w-full flex justify-center items-center">
-        <span class="text-base font-bold text-gray-210 cursor-pointer">Previous Page</span>
-        <Divider></Divider>
-        <span class="text-base font-bold text-blue-450 cursor-pointer">Next Page</span>
-      </div>
-      <div class="w-full flex justify-center mt-4">
-        <span class="text-base font-normal text-gray-360">Showing results</span>
-        <span class="text-base font-normal text-gray-360 ml-1">1-20</span>
-      </div>
-    </section>
+      <Pagination @setPage="handleGetPageMovies" :result="result" :total="total_page"></Pagination>
   </div>
 </template>
 
 <script setup lang="ts">
 import MovieBox from './components/MovieBox.vue'
-import Divider from '../shared/Divider.vue'
+
+import Pagination from './components/Pagination.vue'
 import type {MovieModel} from "@/types/Movie.model";
 import type {GenresItem} from "@/types/Genres.model";
 
@@ -30,9 +21,20 @@ import {defineProps} from "vue";
 type OwnProps = {
   movies: MovieModel[];
   genres: GenresItem[];
+  total_page: number;
+  result: any;
 }
 
-const { movies, genres } = defineProps<OwnProps>()
+const emit = defineEmits<{
+  (e: 'getMoviesWithPage', page: number): void
+}>();
+
+const { movies, genres, total_page, result } = defineProps<OwnProps>()
+
+const handleGetPageMovies = (page: any) => {
+  console.log(page.value)
+  emit('getMoviesWithPage', page.value)
+}
 </script>
 
 <style scoped lang="css">
