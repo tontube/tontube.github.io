@@ -5,7 +5,7 @@
                   :genres="genres"
         ></MovieBox>
     </section>
-      <Pagination @setPage="handleGetPageMovies" :result="result" :total="total_page"></Pagination>
+      <Pagination @setPage="handleGetPageMovies" :total="total_page"></Pagination>
   </div>
 </template>
 
@@ -22,14 +22,13 @@ type OwnProps = {
   movies: MovieModel[];
   genres: GenresItem[];
   total_page: number;
-  result: any;
 }
 
 const emit = defineEmits<{
   (e: 'getMoviesWithPage', page: number): void
 }>();
 
-const { movies, genres, total_page, result } = defineProps<OwnProps>()
+const { movies, genres, total_page } = defineProps<OwnProps>()
 
 const handleGetPageMovies = (page: any) => {
   console.log(page.value)

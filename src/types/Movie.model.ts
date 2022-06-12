@@ -10,7 +10,7 @@ export interface SingleMovie {
     },
     "budget": number;
     "genres": GenresItem[];
-    "homepage": number;
+    "homepage": string;
     "id": number;
     "imdb_id": string;
     "original_language": string;
@@ -58,7 +58,7 @@ export interface MovieModel {
     vote_count: number;
     video: boolean;
     vote_average: number;
-    genres: GenresItem[] | undefined;
+    genres: GenresItem[];
 }
 export interface MovieResultModel {
     page: number;

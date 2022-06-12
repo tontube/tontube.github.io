@@ -3,5 +3,5 @@ export interface GenresItem {
     name: string;
 }
 export interface GenresModel {
-    genres: GenresItem[]
+    genres: GenresItem[];
 }

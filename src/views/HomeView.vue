@@ -4,7 +4,6 @@
         <SearchBar @change="handleDateChange"></SearchBar>
 
         <MoviesList @getMoviesWithPage="handleGetPageMovies"
-                    :result="result"
                     :total_page="totalPage" :movies="movies" :genres="genres"></MoviesList>
     </section>
   </main>
@@ -37,10 +36,11 @@ const getMovies = async (options?: GetMoviesOptions) => {
       .then( (response: MovieResultModel) => {
         movies.value = response.results;
         totalPage.value = response.total_pages;
-        movies.value.map(item => {
+        movies.value.map((item: MovieModel) => {
           item.genres = item.genre_ids.map(genreId => {
             return genres.value.find(item => item.id === genreId)
           })
+          debugger
           return item
         })
       }).catch(err => {

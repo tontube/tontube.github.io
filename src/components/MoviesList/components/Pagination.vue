@@ -24,7 +24,6 @@ import { ref} from 'vue';
 
 type OwnProps = {
   total: number;
-  result: any;
 }
 
 const emit = defineEmits<{
@@ -50,7 +49,7 @@ const handleGetPreviousPage = (page: any) => {
  * Go Next Page
  * @param page
  */
-const handleGetNextPage = (page: number) => {
+const handleGetNextPage = () => {
 
   if (currentPage.value < props.total) {
     currentPage.value += 1;

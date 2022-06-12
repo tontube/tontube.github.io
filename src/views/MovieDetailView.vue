@@ -88,9 +88,8 @@
 </template>
 
 <script setup lang="ts">
-import vue3StarRatings from "vue3-star-ratings";
 import { useRoute, useRouter } from 'vue-router';
-import {onMounted, ref, toRef} from "vue";
+import {onMounted, ref} from "vue";
 import fetchApi from "@/components/shared/fetchApi";
 
 import type { Ref } from 'vue'
