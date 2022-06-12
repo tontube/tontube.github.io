@@ -7,19 +7,19 @@
       <Divider></Divider>
       <span
           @click="handleGetNextPage"
-          :class="{ 'cursor-not-allowed': (currentPage === total) }"
+          :class="{ 'cursor-not-allowed': (currentPage === props.total) }"
           class="pagination-btn text-base font-bold text-blue-450 cursor-pointer">Next Page</span>
     </div>
     <div class="w-full flex justify-center mt-4">
       <span  class="text-base font-normal text-gray-360">Showing results</span>
-      <span  class="text-base font-normal text-gray-360 ml-1">{{ currentPage }}-{{result.total_pages}}</span>
+      <span  class="text-base font-normal text-gray-360 ml-1">{{ currentPage }}-{{props.total}}</span>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import Divider from '@/components/shared/Divider.vue'
-import {defineProps, watch} from "vue";
+import {defineProps} from "vue";
 import { ref} from 'vue';
 
 type OwnProps = {
@@ -29,12 +29,16 @@ type OwnProps = {
 
 const emit = defineEmits<{
   (e: 'setPage', currentPage: any): void
+  (e: 'notChange'): void
 }>();
 
 const currentPage = ref(1);
 
-const { total, result } = defineProps<OwnProps>()
-
+const  props = defineProps<OwnProps>()
+/**
+ * Go Previous page
+ * @param page
+ */
 const handleGetPreviousPage = (page: any) => {
   if (currentPage.value !== 1) {
     currentPage.value -= 1;
@@ -42,13 +46,17 @@ const handleGetPreviousPage = (page: any) => {
   }
 
 }
-
+/**
+ * Go Next Page
+ * @param page
+ */
 const handleGetNextPage = (page: number) => {
-  console.log(total)
-  console.log(result.total_pages)
-  if (currentPage.value < total) {
+
+  if (currentPage.value < props.total) {
     currentPage.value += 1;
     emit('setPage', currentPage);
+  } else {
+    emit('notChange')
   }
 }
 </script>

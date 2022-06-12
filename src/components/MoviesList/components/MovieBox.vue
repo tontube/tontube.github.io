@@ -5,7 +5,7 @@
       <img :src="getMovieImage(movie.poster_path)" alt="" class="object-cover object-center w-full h-full">
     </div>
     <div class="movie-details pl-2.5 flex flex-row flex-wrap content-between py-3">
-      <span class="text-base font-bold">{{movie.title}}</span>
+      <span class="truncate-text text-base font-bold">{{movie.title}}</span>
       <div>
         <div class="flex flex-row justify-start">
           <img src="@/assets/img/calendar-icon.svg" alt="calendar-icon">
@@ -76,5 +76,11 @@ const getMovieImage = (fileName: string) => {
   font-size:40px;
   vertical-align:middle;
   line-height:20px;
+}
+.truncate-text {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

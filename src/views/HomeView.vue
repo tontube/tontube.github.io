@@ -19,10 +19,10 @@ import type {MovieModel, MovieResultModel} from "@/types/Movie.model";
 import type {GenresModel} from "@/types/Genres.model";
 import type {GenresItem} from "@/types/Genres.model";
 
-const movies: Ref<MovieModel[] | undefined> = ref([]);
-const genres: Ref<GenresItem[] | undefined> = ref([]);
-const totalPage: Ref<number | undefined> = ref(0);
-const result: Ref<MovieResultModel | undefined> = ref({});
+const movies: Ref<MovieModel[]> = ref([]);
+const genres: Ref<GenresItem[]> = ref([]);
+const totalPage: Ref<number> = ref(0);
+
 const selectedDate = ref();
 
 type GetMoviesOptions = {
@@ -36,13 +36,13 @@ const getMovies = async (options?: GetMoviesOptions) => {
   fetchApi.getMethod('/discover/movie', {params: {}}, options)
       .then( (response: MovieResultModel) => {
         movies.value = response.results;
-
-        result.value = response;
-        setTimeout(() => {
-          totalPage.value = response.total_pages;
-          console.log('================MD==================')
-        }, 1000)
-        console.log(totalPage)
+        totalPage.value = response.total_pages;
+        movies.value.map(item => {
+          item.genres = item.genre_ids.map(genreId => {
+            return genres.value.find(item => item.id === genreId)
+          })
+          return item
+        })
       }).catch(err => {
           console.log(err)
       })
@@ -55,12 +55,6 @@ const getAllMovieGenres = async () => {
   fetchApi.getMethod('/genre/movie/list')
       .then( (response: GenresModel) => {
         genres.value = response.genres;
-        movies.value.map(item => {
-          item.genres = item.genre_ids.map(genreId => {
-            return genres.value.find(item => item.id === genreId)
-          })
-          return item
-        })
       }).catch(err => {
     console.log(err)
   })
@@ -119,8 +113,9 @@ const handleGetPageMovies = (page: number) => {
  * On component did mount hook
  */
 onMounted(async () =>{
-  await getMovies();
   await getAllMovieGenres();
+  await getMovies();
+
 })
 </script>
 <style lang="css">

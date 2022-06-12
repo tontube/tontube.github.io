@@ -61,10 +61,10 @@ export interface MovieModel {
     genres: GenresItem[] | undefined;
 }
 export interface MovieResultModel {
-    page?: number;
-    results?: MovieModel[];
-    total_results?: number;
-    total_pages?: number;
+    page: number;
+    results: MovieModel[];
+    total_results: number;
+    total_pages: number;
 }
 export interface MovieCast {
     "adult": boolean;

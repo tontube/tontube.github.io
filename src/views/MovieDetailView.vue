@@ -37,7 +37,9 @@
           </li>
           <li class="flex flex-row justify-between">
             <span class="font-bold text-base">Score</span>
-            <span class="font-normal text-base">{{movie?.vote_average}}</span>
+            <span class="font-normal text-base">
+              {{movie?.vote_average}}
+            </span>
           </li>
           <li class="flex flex-row justify-between">
             <span class="font-bold text-base">Genres</span>
@@ -86,8 +88,9 @@
 </template>
 
 <script setup lang="ts">
+import vue3StarRatings from "vue3-star-ratings";
 import { useRoute, useRouter } from 'vue-router';
-import {onMounted, ref} from "vue";
+import {onMounted, ref, toRef} from "vue";
 import fetchApi from "@/components/shared/fetchApi";
 
 import type { Ref } from 'vue'
