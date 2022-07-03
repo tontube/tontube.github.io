@@ -7,6 +7,7 @@ import inject from '@rollup/plugin-inject'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/client/",
+  publicDir: "/client/",
   plugins: [vue()],
   build: {
     chunkSizeWarningLimit: 1600,
