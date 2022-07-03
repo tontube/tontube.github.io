@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
 </script>
 
 <template>
-  <Header></Header>
   <RouterView />
 </template>
 
 <style lang="css">
+body {
+  font-family: 'Calibri', sans-serif !important;
+}
 #app {
-  font-family: 'Roboto', sans-serif;
+  background: #1c1917;
+  font-family: 'Calibri', sans-serif;
+  height: 100vh;
 }
 </style>
