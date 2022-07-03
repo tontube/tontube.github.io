@@ -8,6 +8,8 @@ import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import VueSocketIO from 'vue-3-socket.io'
+import * as Buffer from 'buffer'
+globalThis.Buffer = Buffer.Buffer
 
 const app = createApp(App)
 

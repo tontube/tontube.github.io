@@ -1,15 +1,15 @@
 {
   "name": "ton-tube",
   "version": "0.0.1",
-  "author":{
+  "author": {
     "Ehsan Ghasemi": {
-      "Email" : "ehs.ghasemi@gmail.com",
-      "linkedin" : "https://www.linkedin.com/in/ghasemiehsan/",
+      "Email": "ehs.ghasemi@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/ghasemiehsan/",
       "Telegram": "@eh7an"
     },
     "Yashar PourMohamad": {
-      "Email" : "yasharpm@gmail.com",
-      "linkedin" : "https://www.linkedin.com/in/yasharpm/",
+      "Email": "yasharpm@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/yasharpm/",
       "Telegram": "@yasharpm"
     },
     "name": ""
@@ -22,7 +22,6 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@cloudgeek/vue3-video-player": "^0.3.10",
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@rollup/plugin-inject": "^4.0.4",
     "@vuepic/vue-datepicker": "^3.2.2",

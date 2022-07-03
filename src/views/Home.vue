@@ -2,7 +2,7 @@
   <div class="h-full">
     <div class="bg-blue-650 h-12 w-full">
       <div class="flex flex-row w-100 justify-around app-ton-header">
-        <span class="text-white font-bold ton-tube">Ton Tube</span>
+        <span class="text-white font-bold ton-tube">TONTube</span>
         <div class="ton-ac-tim">
           <div class="flex flex-row items-center justify-between">
             <i class="pi pi-clock mr-2"></i>
@@ -20,9 +20,13 @@
 
     <div class="player-container relative vid-container">
       <video class="v-pl" poster="/logo_big.jpg" @ended="streamEnded" ref="videoPlayer" src=""></video>
-      <div class="v-b-hl">
-        <Button class="btn-play-stream" @click="playStream">Play Stream</Button>
+      <div @click="playStream" class="play-btn">
+        <i v-if="streamState === 'IDLE'" class="pi pi-play text-white text-6xl"></i>
+        <i v-if="streamState === 'STREAMING'" class="pi pi-pause text-white text-6xl"></i>
       </div>
+<!--      <div class="v-b-hl">-->
+<!--        <Button class="btn-play-stream" @click="playStream">Play Stream</Button>-->
+<!--      </div>-->
       <!-- ================ Buy Subscription Dialog ==============     -->
       <Dialog v-model:visible="balanceAcc">
         <template #header>
@@ -36,7 +40,6 @@
             placeholder="value in TON"
         >
         </InputText>
-
         <template #footer>
           <Button  label="Cancel" @click="balanceAcc = false" icon="pi pi-times" class="p-button-text"/>
           <Button :loading="isLoading" @click="createChannel" label="Ok" icon="pi pi-check" autofocus />
@@ -50,12 +53,6 @@
         <p class="mb-3">
           Your subscription has ended! If you want to continue watching, please press 'play' and make another purchase.
         </p>
-        <InputText
-            v-model="amount"
-            placeholder="value in TON"
-        >
-        </InputText>
-
         <template #footer>
           <Button  label="ok" @click="subEnded = false" icon="pi pi-times" class="p-button-text"/>
         </template>
@@ -110,6 +107,7 @@ export default {
       this.tonHelp.serverWalletAddr = new TonWeb.utils.Address(data[1]);
     },
     latestState: function (data)  {
+      debugger
       if (data === 'end') {
         data = null;
       }
@@ -129,6 +127,10 @@ export default {
           this.$refs.videoPlayer.pause();
         }
       }
+      else if(this.streamState === OwnState.IDLE) {
+        this.remaningTime = this.latestState.client_balance * 100 * 30;
+        this.calcTimeLeft();
+      }
     },
     pay: async function () {
       if (this.streamState === OwnState.IDLE) {
@@ -144,7 +146,7 @@ export default {
       this.secret = data;
 
       if (this.streamState == OwnState.STREAMING && this.$refs.videoPlayer.paused) {
-        this.$refs.videoPlayer.src = "http://localhost:3001/getVideo?secret=" + this.secret;
+        this.$refs.videoPlayer.src = "http://188.208.143.130:3001/getVideo?secret=" + this.secret;
         this.$refs.videoPlayer.play();
       }
     }
@@ -164,8 +166,6 @@ export default {
   methods: {
     calcRemainingTime() {
       this.remaningTime = this.latestState.client_balance * 100 * 30;
-      console.log('Remaining Time is :::::',this.remaningTime)
-      // Format To H an M an S
     },
     playStream() {
       switch (this.streamState) {
@@ -227,6 +227,25 @@ export default {
             + minutes + "m " + seconds + "s ";
         // If the count down is finished, write some text
       }.bind(this), 1000);
+    },
+    calcTimeLeft() {
+      let distance = this.remaningTime;
+      if (distance === 0) {
+        this.timeBalance = "Subscription has ended";
+        return;
+      }
+      // Time calculations for days, hours, minutes and seconds
+      let days = Math.floor(distance / ( 60 * 60 * 24));
+      distance -= days * 60 * 60 * 24;
+      let hours = Math.floor(distance / (  60 * 60));
+      distance -= hours * 60 * 60;
+      let minutes = Math.floor(distance /  60);
+      distance -= minutes * 60;
+      let seconds = Math.floor(distance);
+
+      // Display the result in the element with id="demo"
+      this.timeBalance = days + "d " + hours + "h "
+          + minutes + "m " + seconds + "s ";
     },
     stopTimer() {
       clearInterval(this.tnTimer);
@@ -294,5 +313,29 @@ video::-webkit-media-controls {
 .ton-tube {
   font-style: italic;
   font-size: 25px;
+}
+.vid-container:hover .play-btn {
+  visibility: visible;
+  opacity: 1;
+}
+.play-btn {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+  position: absolute;
+  top: 44%;
+  left: 250px;
+  display: flex;
+  border-radius: 50%;
+  background: #1d1917;
+  width: 80px;
+  height: 80px;
+
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.play-btn i {
+  font-size: 29px;
 }
 </style>

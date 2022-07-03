@@ -7,10 +7,10 @@
 
 <style lang="css">
 body {
+  background: #1c1917;
   font-family: 'Calibri', sans-serif !important;
 }
 #app {
-  background: #1c1917;
   font-family: 'Calibri', sans-serif;
   height: 100vh;
 }

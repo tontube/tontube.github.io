@@ -24,7 +24,6 @@ import TonWeb from "tonweb";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
-import * as Buffer from "buffer";
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 
