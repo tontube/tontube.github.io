@@ -19,7 +19,7 @@
 
 
     <div class="player-container relative vid-container">
-      <video class="v-pl" poster="/logo_big.jpg" @ended="streamEnded" ref="videoPlayer" src=""></video>
+      <video class="v-pl" poster="/public/logo_big.jpg" @ended="streamEnded" ref="videoPlayer" src=""></video>
       <div @click="playStream" class="play-btn">
         <i v-if="streamState === 'IDLE'" class="pi pi-play text-white text-6xl"></i>
         <i v-if="streamState === 'STREAMING'" class="pi pi-pause text-white text-6xl"></i>
