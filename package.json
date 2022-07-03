@@ -1,6 +1,19 @@
 {
-  "name": "movies-app",
-  "version": "0.0.0",
+  "name": "ton-tube",
+  "version": "0.0.1",
+  "author":{
+    "Ehsan Ghasemi": {
+      "Email" : "ehs.ghasemi@gmail.com",
+      "linkedin" : "https://www.linkedin.com/in/ghasemiehsan/",
+      "Telegram": "@eh7an"
+    },
+    "Yashar PourMohamad": {
+      "Email" : "yasharpm@gmail.com",
+      "linkedin" : "https://www.linkedin.com/in/yasharpm/",
+      "Telegram": "@yasharpm"
+    },
+    "name": ""
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p build-only",
